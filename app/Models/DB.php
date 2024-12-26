@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Models;
+namespace App\Models;
 
 use PDO;
 
@@ -22,6 +22,8 @@ class DB {
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
             ]
         );
+    }
+    public function getConnection () {
         return $this->conn;
     }
 }

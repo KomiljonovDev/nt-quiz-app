@@ -1,9 +1,9 @@
 <?php
 
-namespace app\Traits;
+namespace App\Traits;
 
 trait HasApiTokens {
-    protected string $api_token;
+    public string $api_token;
     protected string $duration;
     public function createApiToken (int $userId): string {
         $query = "INSERT INTO user_api_tokens (user_id, token, expires_at, created_at)
