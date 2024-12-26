@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Traits;
-
-use Random\RandomException;
+namespace app\Traits;
 
 trait HasApiTokens {
     protected string $api_token;
