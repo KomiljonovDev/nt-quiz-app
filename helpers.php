@@ -15,7 +15,7 @@ function view (string $page, array $data = []): void {
     require 'resources/views/' . $page . '.php';
 }
 
-#[NoReturn] function redirect (string $url) {
+#[NoReturn] function redirect (string $url): void {
     header('Location: ' . $url);
     exit();
 }
