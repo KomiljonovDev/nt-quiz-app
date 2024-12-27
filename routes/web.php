@@ -1,5 +1,10 @@
 <?php
 
+use src\Router;
+
+Router::get('/', function () {
+    view('home');
+});
 
 
 /*
