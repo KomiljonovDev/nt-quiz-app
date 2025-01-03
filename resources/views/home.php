@@ -11,10 +11,11 @@
             text-align: center;
         }
     </style>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/tailwind.css">
 </head>
 <body>
+    <h1 class="text-green-500 underline text-3xl">Hello World</h1>
     <h1 style="color: red">Hello World</h1>
-    <h1 class="text-green">Hello World</h1>
+    <h1 class="text-green">Hello Axror</h1>
 </body>
 </html>
