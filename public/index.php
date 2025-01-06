@@ -4,5 +4,5 @@ require '../bootstrap.php';
 
 require '../router.php';
 
-echo 'index.php ga keldi';
+echo '404 not found (topilmadi)';
 
