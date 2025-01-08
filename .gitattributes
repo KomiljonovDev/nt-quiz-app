@@ -1,0 +1,28 @@
+# Force consistent line endings for all text files
+* text=auto eol=lf
+
+# Define how diffs are displayed for specific file types
+*.blade.php diff=html
+*.css diff=css
+*.html diff=html
+*.md diff=markdown
+*.php diff=php
+
+# Exclude the "vendor" directory (dependencies) from language stats
+/vendor/* linguist-vendored
+
+# Exclude Node.js dependencies (for projects using npm or yarn)
+/node_modules/* linguist-vendored
+
+# Exclude storage and public directories (for generated files)
+/storage/* linguist-generated
+/public/* linguist-generated
+
+# Exclude hidden CI/CD files and documentation from exported archives
+/.github export-ignore
+CHANGELOG.md export-ignore
+.styleci.yml export-ignore
+.env.example export-ignore
+
+# Exclude Composer lock file from exported archives
+composer.lock export-ignore
