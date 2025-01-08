@@ -12,7 +12,7 @@ Router::post('/api/login', [UserController::class, 'login']);
 Router::post('/api/quizzes', [QuizController::class, 'store']);
 
 
-echo 'Rout yoq axmoq!';
+Router::notFound();
 
 
 

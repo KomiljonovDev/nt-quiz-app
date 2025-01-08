@@ -83,4 +83,9 @@ class Router {
     public static function isTelegram (): bool {
         return mb_stripos(self::getRoute(), '/telegram') === 0;
     }
+    public static function notFound (): void {
+        http_response_code(404);
+        echo '404';
+        exit();
+    }
 }

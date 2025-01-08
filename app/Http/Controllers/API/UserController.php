@@ -32,5 +32,8 @@ class UserController {
                 'token' => $user->api_token,
             ]);
         }
+        apiResponse([
+            'message' => 'Invalid credentials',
+        ], 401);
     }
 }
