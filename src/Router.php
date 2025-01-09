@@ -1,6 +1,8 @@
 <?php
 
-namespace src;
+namespace Src;
+
+use \Src\middleware\Auth;
 
 class Router {
     public $currentRoute;
@@ -84,8 +86,9 @@ class Router {
         return mb_stripos(self::getRoute(), '/telegram') === 0;
     }
     public static function notFound (): void {
-        http_response_code(404);
-        echo '404';
-        exit();
+        if (self::isApiCall()) {
+            apiResponse(['error' => 'Not found'], 404);
+        }
+        view('404');
     }
 }
