@@ -1,19 +1,15 @@
 <?php
 
-use App\Http\Controllers\API\QuizController;
 use App\Http\Controllers\API\UserController;
 use Src\Router;
 
-Router::get('/api/test', [UserController::class, 'test']);
+Router::get('/api/users/{id}', [UserController::class, 'show'], 'auth:api');
+
 //Auth
-Router::post('/api/register', [UserController::class, 'store']);
-Router::post('/api/login', [UserController::class, 'login']);
-
-// quiz
-Router::post('/api/quizzes', [QuizController::class, 'store']);
-
-
-Router::notFound();
+//Router::post('/api/register', [UserController::class, 'store']);
+//Router::post('/api/login', [UserController::class, 'login']);
+//
+//Router::notFound();
 
 
 

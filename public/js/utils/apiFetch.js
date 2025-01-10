@@ -1,5 +1,5 @@
 function apiFetch(uri, options = {}) {
-    const baseUrl = 'http://localhost:8000/api',
+    const baseUrl = 'http://localhost:8080/api',
         token = localStorage.getItem('token');
     const defaultHeaders = {};
     if (token) {

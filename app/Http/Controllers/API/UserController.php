@@ -36,4 +36,12 @@ class UserController {
             'message' => 'Invalid credentials',
         ], 401);
     }
+    public function show () {
+        apiResponse([
+            'user' => [
+                'name' => 'John Doe',
+                'email' => 'john@doe.com',
+            ],
+        ]);
+    }
 }
