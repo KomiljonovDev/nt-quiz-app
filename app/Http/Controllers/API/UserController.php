@@ -33,7 +33,9 @@ class UserController {
             ]);
         }
         apiResponse([
-            'message' => 'Invalid credentials',
+            'errors'=>[
+                'message'=>'Invalid email or password',
+            ]
         ], 401);
     }
     public function show () {
