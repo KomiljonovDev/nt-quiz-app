@@ -15,6 +15,11 @@ function view (string $page, array $data = []): void {
     require 'resources/views/' . $page . '.php';
 }
 
+function components (string $component, array $data = []): void {
+    extract($data);
+    require 'resources/views/components/' . $component . '.php';
+
+}
 #[NoReturn] function redirect (string $url): void {
     header('Location: ' . $url);
     exit();
