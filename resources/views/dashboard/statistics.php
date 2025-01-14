@@ -4,19 +4,8 @@
     <div class="bg-gray-100">
         <div class="min-h-screen flex">
             <!-- Sidebar -->
-            <aside class="bg-white w-64 min-h-screen flex flex-col shadow-lg transform -translate-x-full md:translate-x-0 transition-transform duration-150 ease-in fixed md:static z-30"
-                   id="sidebar">
-                <div class="p-4 border-b flex items-center justify-between">
-                    <h2 class="text-2xl font-bold text-gray-800">Quiz App</h2>
-                    <div>
-                        <button class="md:hidden text-gray-600"
-                                onclick="document.getElementById('sidebar').classList.toggle('-translate-x-full')">
-                            <i class="fas fa-close text-xl"></i>
-                        </button>
-                    </div>
-                </div>
-                <?php components('dashboard/sidebar'); ?>
-            </aside>
+
+            <?php components('dashboard/sidebar'); ?>
 
             <!-- Main Content -->
             <div class="flex-1">
@@ -31,7 +20,7 @@
 
                             <div class="flex items-center space-x-2">
                                 <img src="https://via.placeholder.com/40" alt="Profile" class="w-10 h-10 rounded-full">
-                                <span class="text-gray-700 font-medium">John Doe</span>
+                                <span class="text-gray-700 font-medium" id="userName">John Doe</span>
                             </div>
                         </div>
                     </div>
