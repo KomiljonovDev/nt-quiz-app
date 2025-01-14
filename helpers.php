@@ -18,7 +18,6 @@ function view (string $page, array $data = []): void {
 function components (string $component, array $data = []): void {
     extract($data);
     require 'resources/views/components/' . $component . '.php';
-
 }
 #[NoReturn] function redirect (string $url): void {
     header('Location: ' . $url);

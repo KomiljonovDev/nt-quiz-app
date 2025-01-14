@@ -15,4 +15,7 @@ class UserController {
     public function statistics () {
         view('dashboard/statistics');
     }
+    public function handlePost () {
+        dd($_REQUEST);
+    }
 }

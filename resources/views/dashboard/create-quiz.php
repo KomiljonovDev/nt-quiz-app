@@ -1,5 +1,6 @@
 <?php components('dashboard/header'); ?>
     <script src="/js/dashboard/getUserInfo.js"></script>
+    <script src="/js/dashboard/add-quiz.js"></script>
     <div class="bg-gray-100">
         <div class="flex min-h-screen">
             <!-- Sidebar -->
@@ -35,7 +36,7 @@
                             </div>
 
                             <!-- Main Form -->
-                            <form class="space-y-4" id="quizForm">
+                            <form class="space-y-4" id="quizForm" method="POST">
                                 <!-- Quiz Details Section -->
                                 <div class="bg-white p-6 rounded-lg shadow-md">
                                     <h3 class="text-xl font-semibold text-gray-800 mb-4">Quiz Details</h3>
