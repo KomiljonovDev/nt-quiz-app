@@ -11,12 +11,16 @@ Class Auth {
         $headers = getallheaders();
         if (!isset($headers['Authorization'])) {
             apiResponse([
-                'message' => 'Unauthorized'
+                'errors'=>[
+                    'message' => 'Unauthorized'
+                ]
             ], 401);
         }
         if (!str_starts_with($headers['Authorization'], 'Bearer ')) {
             apiResponse([
-                'message' => 'Authorization format is invalid, allowed format is Bearer'
+                'errors'=>[
+                    'message' => 'Authorization format is invalid, allowed format is Bearer'
+                ]
             ], 400);
         }
         return str_replace('Bearer ', '', $headers['Authorization']);
@@ -34,7 +38,9 @@ Class Auth {
     public static function  check(): bool {
         if (!self::getToken()) {
             apiResponse([
-                'message' => 'Unauthorized'
+                'errors'=>[
+                    'message' => 'Unauthorized'
+                ]
             ], 401);
         }
         return true;

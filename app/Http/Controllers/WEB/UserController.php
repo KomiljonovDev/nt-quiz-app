@@ -15,7 +15,10 @@ class UserController {
     public function statistics () {
         view('dashboard/statistics');
     }
-    public function handlePost () {
-        dd($_REQUEST);
+
+    public function update (int $id) {
+        view('dashboard/update-quiz', [
+            'id' => $id
+        ]);
     }
 }

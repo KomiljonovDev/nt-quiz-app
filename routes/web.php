@@ -9,11 +9,15 @@ Router::get('/about', [HomeController::class, 'about']);
 Router::get('/login', [HomeController::class, 'login']);
 Router::get('/register', [HomeController::class, 'register']);
 
+Router::get('/take-quiz', [HomeController::class, 'takeQuiz']);
+
 Router::get('/dashboard', [UserController::class, 'home']);
+
+//Quizzes
 Router::get('/dashboard/quizzes', [UserController::class, 'quizzes']);
 Router::get('/dashboard/create-quiz', [UserController::class, 'createQuiz']);
+Router::get('/dashboard/quizzes/{id}/update', [UserController::class, 'update']);
 
-//Router::post('/dashboard/create-quiz', [UserController::class, 'handlePost']);
 
 Router::get('/dashboard/statistics', [UserController::class, 'statistics']);
 

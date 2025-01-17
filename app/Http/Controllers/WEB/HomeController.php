@@ -15,9 +15,7 @@ class HomeController {
     public function register () {
         view('auth/register');
     }
-    public function contact (): void {
-        view('contact',[
-            'contact_message' => 'Message'
-        ]);
+    public function takeQuiz (): void {
+        view('quiz/take-quiz');
     }
 }
