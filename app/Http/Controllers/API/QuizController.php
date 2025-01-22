@@ -18,9 +18,12 @@ class QuizController {
 
     public function show (int $quizId) {
         $quiz = (new Quiz())->find($quizId);
-        $questions = (new Question())->getWithOptions($quizId);
-        $quiz->questions = $questions;
-        apiResponse($quiz);
+        if ($quiz){
+            $questions = (new Question())->getWithOptions($quizId);
+            $quiz->questions = $questions;
+            apiResponse($quiz);
+        }
+        apiResponse(['errors' => ['message' => 'Quiz not found']], 404);
     }
 
     public function store () {

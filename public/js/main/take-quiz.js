@@ -1,3 +1,10 @@
+let startBtn = document.getElementById('start-btn');
+startBtn.addEventListener('click', () => {
+    let startQuizContainer = document.getElementById('start-card');
+    startQuizContainer.classList.add('hidden');
+    document.getElementById('questionContainer').classList.remove('hidden');
+});
+
 // Timer functionality
 function startTimer(duration, display) {
     let timer = duration;
@@ -16,77 +23,78 @@ function startTimer(duration, display) {
 let options = document.getElementById('options'),
     questions = [
         {
-            'id':1,
+            'id': 1,
             'question': 'What is the output of console.log(typeof undefined)?',
             'options': [
                 {
-                    'id':1,
-                    'option_text':'undefined'
+                    'id': 1,
+                    'option_text': 'undefined'
                 },
                 {
-                    'id':2,
-                    'option_text':'object'
+                    'id': 2,
+                    'option_text': 'object'
                 },
                 {
-                    'id':3,
-                    'option_text':'string'
+                    'id': 3,
+                    'option_text': 'string'
                 },
                 {
-                    'id':4,
-                    'option_text':'null'
+                    'id': 4,
+                    'option_text': 'null'
                 }
             ],
         },
         {
-            'id':2,
+            'id': 2,
             'question': 'What is the output of console.log(typeof null)?',
             'options': [
                 {
-                    'id':1,
-                    'option_text':'undefined'
+                    'id': 1,
+                    'option_text': 'undefined'
                 },
                 {
-                    'id':2,
-                    'option_text':'object'
+                    'id': 2,
+                    'option_text': 'object'
                 },
                 {
-                    'id':3,
-                    'option_text':'string'
+                    'id': 3,
+                    'option_text': 'string'
                 },
                 {
-                    'id':4,
-                    'option_text':'null'
+                    'id': 4,
+                    'option_text': 'null'
                 }
             ],
         },
         {
-            'id':3,
+            'id': 3,
             'question': 'What is the output of console.log(typeof {})?',
             'options': [
                 {
-                    'id':1,
-                    'option_text':'undefined'
+                    'id': 1,
+                    'option_text': 'undefined'
                 },
                 {
-                    'id':2,
-                    'option_text':'object'
+                    'id': 2,
+                    'option_text': 'object'
                 },
                 {
-                    'id':3,
-                    'option_text':'string'
+                    'id': 3,
+                    'option_text': 'string'
                 },
                 {
-                    'id':4,
-                    'option_text':'null'
+                    'id': 4,
+                    'option_text': 'null'
                 }
             ],
         }
     ],
     currentQuestionIndex = 0;
 
-function takeQuiz(index=0) {
+function takeQuiz(index = 0) {
     return questions[index];
 }
+
 document.addEventListener('DOMContentLoaded', () => {
     const timerDisplay = document.getElementById('timer');
     startTimer(1200, timerDisplay); // 20 minutes
@@ -131,7 +139,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('submit-quiz').addEventListener('click', () => {
+        if (currentQuestionIndex >= 2) {
+            currentQuestionIndex--;
+        }
         console.log(currentQuestionIndex);
-        // Handle quiz submission
+        console.log(questions[currentQuestionIndex]);
+        questions.splice(currentQuestionIndex, 1);
+        let question = takeQuiz(currentQuestionIndex),
+            questionElement = document.getElementById('question'),
+            questionContainer = document.getElementById('questionContainer');
+        if (question) {
+            questionElement.textContent = question.question;
+            options.innerHTML = '';
+            question.options.forEach((option) => {
+                options.innerHTML += `
+                <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                    <input type="radio" name="answer" class="h-4 w-4 text-blue-600" value="${option.id}">
+                    <span class="ml-3">${option.option_text}</span>
+                </label>`
+            });
+        } else {
+            questionContainer.innerHTML = '';
+            document.getElementById('results-card').classList.remove('hidden');
+        }
     });
 });

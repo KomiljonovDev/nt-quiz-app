@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Http\Controllers\WEB;
+
+use App\Models\Quiz;
+
+class QuizController {
+    public function takeQuiz (string $uniqueValue): void {
+        $quiz = (new Quiz())->findByUniqueValue($uniqueValue);
+        if ($quiz){
+            view('quiz/take-quiz');
+        }
+        view('errors/404');
+    }
+}

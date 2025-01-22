@@ -15,7 +15,4 @@ class HomeController {
     public function register () {
         view('auth/register');
     }
-    public function takeQuiz (): void {
-        view('quiz/take-quiz');
-    }
 }

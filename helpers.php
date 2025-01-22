@@ -13,6 +13,7 @@ use JetBrains\PhpStorm\NoReturn;
 function view (string $page, array $data = []): void {
     extract($data);
     require 'resources/views/' . $page . '.php';
+    exit();
 }
 
 function components (string $component, array $data = []): void {

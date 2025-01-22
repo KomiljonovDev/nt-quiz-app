@@ -25,6 +25,14 @@ class Quiz extends DB {
         ]);
         return $stmt->fetch();
     }
+    public function findByUniqueValue (string $uniqueValue) {
+        $query = "SELECT * FROM quizzes WHERE unique_value = :uniqueValue";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([
+            ':uniqueValue' => $uniqueValue
+        ]);
+        return $stmt->fetch();
+    }
     public function getByUserId (int $userId): array|bool {
         $query = "SELECT * FROM quizzes WHERE user_id = :userId";
         $stmt = $this->conn->prepare($query);
