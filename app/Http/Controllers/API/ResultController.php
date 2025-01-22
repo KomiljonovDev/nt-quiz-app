@@ -22,11 +22,8 @@ class ResultController {
                 $quiz->id,
                 $quiz->time_limit
             );
-            $questions = (new Question())->getWithOptions($quiz->id);
-
             apiResponse([
                 'message' => 'Result created successfully',
-                'questions' => $questions
             ]);
         }
         apiResponse([

@@ -1,5 +1,6 @@
 <?php
 components('main/header');
+//dd($uniqueValue);
 ?>
     <script src="/js/dashboard/getUserInfo.js"></script>
     <div class="flex flex-col min-h-screen bg-gray-100">
@@ -13,8 +14,8 @@ components('main/header');
                     <div class="flex items-center space-x-4">
                         <div class="hidden md:flex items-center space-x-4">
                             <a href="/dashboard" class="text-gray-600 hover:text-gray-900">Dashboard</a>
-<!--                            <a href="#how-it-works" class="text-gray-600 hover:text-gray-900">How It Works</a>-->
-<!--                            <a href="/login" class="text-gray-600 hover:text-gray-900">Login</a>-->
+                            <!--                            <a href="#how-it-works" class="text-gray-600 hover:text-gray-900">How It Works</a>-->
+                            <!--                            <a href="/login" class="text-gray-600 hover:text-gray-900">Login</a>-->
                             <a href="/register"
                                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
                                 Create Quiz
@@ -30,12 +31,12 @@ components('main/header');
             </div>
             <div class="hidden mobile-menu md:hidden pl-3">
                 <a href="/dashboard" class="block my-2 text-xl text-gray-600 hover:text-gray-900">Dashboard</a>
-<!--                <a href="#how-it-works" class="block my-2 text-xl text-gray-600 hover:text-gray-900">How It Works</a>-->
-<!--                <a href="login.html" class="block my-2 text-xl text-gray-600 hover:text-gray-900">Login</a>-->
-<!--                <a href="add-quiz.php"-->
-<!--                   class="block my-2 text-xl inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">-->
-<!--                    Register-->
-<!--                </a>-->
+                <!--                <a href="#how-it-works" class="block my-2 text-xl text-gray-600 hover:text-gray-900">How It Works</a>-->
+                <!--                <a href="login.html" class="block my-2 text-xl text-gray-600 hover:text-gray-900">Login</a>-->
+                <!--                <a href="add-quiz.php"-->
+                <!--                   class="block my-2 text-xl inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">-->
+                <!--                    Register-->
+                <!--                </a>-->
             </div>
         </nav>
 
@@ -43,12 +44,14 @@ components('main/header');
         <main class="flex-grow container mx-auto px-4 py-8">
             <div id="start-card" class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
                 <div class="text-center">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Quiz Title</h2>
-                    <p class="text-xl text-gray-700 mb-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus delectus dolorum eligendi esse excepturi in quam qui veritatis voluptatibus? Dolore.</p>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4" id="title">Quiz Title</h2>
+                    <p class="text-xl text-gray-700 mb-6" id="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Accusamus delectus dolorum eligendi esse excepturi in quam qui veritatis voluptatibus?
+                        Dolore.</p>
 
                     <div class="flex justify-center space-x-12 mb-8">
                         <div class="text-center">
-<!--                            <p class="text-3xl font-bold text-blue-600" id="final-score">0/10</p>-->
+                            <!--                            <p class="text-3xl font-bold text-blue-600" id="final-score">0/10</p>-->
                         </div>
                         <div class="text-center">
                             <p class="text-3xl font-bold text-blue-600" id="time-taken">5:00</p>
@@ -56,7 +59,8 @@ components('main/header');
                         </div>
                     </div>
 
-                    <button id="start-btn" class="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    <button id="start-btn"
+                            class="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
                         Start Quiz
                     </button>
                 </div>
@@ -89,7 +93,8 @@ components('main/header');
                 <!-- Question Container -->
                 <div class="mb-8">
                     <div class="mb-4">
-                        <h2 class="text-lg font-semibold text-gray-800" id="question">What is the output of console.log(typeof
+                        <h2 class="text-lg font-semibold text-gray-800" id="question">What is the output of
+                            console.log(typeof
                             undefined)?</h2>
                     </div>
 
@@ -148,7 +153,8 @@ components('main/header');
                         </div>
                     </div>
 
-                    <a href="/dashboard" class="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    <a href="/dashboard"
+                       class="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
                         Return to Dashboard
                     </a>
                 </div>
@@ -165,6 +171,26 @@ components('main/header');
         </footer>
 
         <!-- Quiz JavaScript -->
+        <script>
+            async function getQuizItems() {
+                const {default: apiFetch} = await import('/js/utils/apiFetch.js');
+                await apiFetch(`/quizzes/<?php echo $uniqueValue; ?>/getByUniqueValue`, {
+                    method: 'GET'
+                })
+                    .then((data) => {
+                        document.getElementById('title').innerText = data.title;
+                        document.getElementById('description').innerText = data.description;
+                        document.getElementById('time-taken').innerText = data.time_limit + ":00";
+                    })
+                    .catch((error) => {
+                        document.getElementById('error').innerHTML = '';
+                        Object.keys(error.data.errors).forEach(err => {
+                            document.getElementById('error').innerHTML += `<p class="text-red-500">${error.data.errors[err]}</p>`;
+                        })
+                    });
+            }
+            getQuizItems()
+        </script>
         <script src="/js/main/take-quiz.js"></script>
         <script>
             // Mobile menu toggle
