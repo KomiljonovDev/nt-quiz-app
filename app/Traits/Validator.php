@@ -15,8 +15,6 @@ trait Validator {
             }
             $requiredKeys[$key] = $key . ' is required';
         }
-        d($data);
-        dd($_REQUEST);
         if(!empty($requiredKeys)){
             apiResponse(['errors'=>$requiredKeys], 400);
         }
