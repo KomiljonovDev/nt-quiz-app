@@ -158,8 +158,10 @@ components('main/header');
 
         <!-- Quiz JavaScript -->
         <script>
-            let questions;
-            let quizData;
+            let questions,
+                quizData,
+                result;
+
             async function getQuizItems() {
                 const {default: apiFetch} = await import('/js/utils/apiFetch.js');
                 try {
@@ -232,7 +234,7 @@ components('main/header');
                         const {default: apiFetch} = await import('/js/utils/apiFetch.js');
                         await apiFetch('/results', {method: 'POST', body: JSON.stringify({quiz_id: quizData.id})})
                             .then((data) => {
-                                console.log(data)
+                                result = data.result;
                             })
                             .catch((error) => {
                                 document.getElementById('error').innerHTML = '';
@@ -241,11 +243,12 @@ components('main/header');
                                 })
                             });
                     }
+
                     startQuiz();
                     let startQuizContainer = document.getElementById('start-card');
                     startQuizContainer.classList.add('hidden');
                     document.getElementById('questionContainer').classList.remove('hidden');
-                    startTimer(quizData.time_limit*60, document.getElementById('timer')); // 20 minutes
+                    startTimer(quizData.time_limit * 60, document.getElementById('timer')); // 20 minutes
                 });
 
                 function startTimer(duration, display) {
@@ -294,6 +297,26 @@ components('main/header');
                     questions.splice(currentQuestionIndex, 1);
                     let question = questions[currentQuestionIndex],
                         questionContainer = document.getElementById('questionContainer');
+                    async function submitAnswer() {
+                        const {default: apiFetch} = await import('/js/utils/apiFetch.js');
+                        await apiFetch('/answers', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                result_id: result.id,
+                                option_id: formData.get('answer')
+                            })
+                        })
+                            .then((data) => {
+                            })
+                            .catch((error) => {
+                                document.getElementById('error').innerHTML = '';
+                                Object.keys(error.data.errors).forEach(err => {
+                                    document.getElementById('error').innerHTML += `<p class="text-red-500 mt-1">${error.data.errors[err]}</p>`;
+                                })
+                            });
+                    }
+
+                    submitAnswer();
                     if (question) {
                         displayQuestion(question);
                     } else {

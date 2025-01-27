@@ -17,13 +17,14 @@ class ResultController {
         $quiz = (new Quiz())->find($resultItems['quiz_id']);
         if ($quiz){
             $result = new Result();
-            $result->create(
+            $resultData = $result->create(
                 Auth::user()->id,
                 $quiz->id,
                 $quiz->time_limit
             );
             apiResponse([
                 'message' => 'Result created successfully',
+                'result' => $resultData
             ]);
         }
         apiResponse([
