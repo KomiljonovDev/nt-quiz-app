@@ -22,4 +22,20 @@ class Answer extends DB {
 //        $answerId = $this->conn->lastInsertId();
 //        return $this->find($answerId);
     }
+
+    public function getCorrectAnswer (int $userId, $quizId) {
+        $query = "SELECT count(answers.id) as correctAnswerCount
+                    FROM answers
+                             JOIN results ON answers.result_id = results.id
+                             JOIN options ON answers.option_id = options.id
+                    WHERE results.user_id = :userId
+                        AND results.quiz_id = :quizId
+                        AND options.is_correct = TRUE";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([
+            'userId'=>$userId,
+            'quizId'=>$quizId
+        ]);
+        return $stmt->fetch();
+    }
 }

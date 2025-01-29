@@ -36,6 +36,7 @@ class Question extends DB {
         $stmt = $this->conn->prepare($query);
         $stmt->execute($questionIds);
         $options = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        shuffle($options);
 
 // Organize options by question_id
         $groupedOptions = [];
@@ -47,7 +48,15 @@ class Question extends DB {
         foreach ($questions as &$question) {
             $question['options'] = $groupedOptions[$question['id']] ?? [];
         }
+        shuffle($questions);
         return $questions;
     }
-
+    public function getQuestionCountByQuizId (int $quizId) {
+        $query = "SELECT COUNT(id) as questionCount FROM questions WHERE quiz_id=:quizId";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([
+            'quizId'=>$quizId
+        ]);
+        return $stmt->fetch();
+    }
 }

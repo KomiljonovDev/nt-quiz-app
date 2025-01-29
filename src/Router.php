@@ -78,6 +78,13 @@ class Router {
             }
         }
     }
+    public static function patch (string $route, callable|array $callback, ?string $middleware=null): void {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PATCH') {
+            if ((isset($_POST['_method']) && $_POST['_method'] == 'PATCH') || $_SERVER['REQUEST_METHOD'] == 'PATCH') {
+                self::runCallback($route, $callback, $middleware);
+            }
+        }
+    }
     public static function delete (string $route, callable|array $callback, ?string $middleware=null): void {
         if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
             self::runCallback($route, $callback, $middleware);
