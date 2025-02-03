@@ -16,6 +16,9 @@ function view (string $page, array $data = []): void {
     exit();
 }
 
+function assets ($fileName): string {
+    return $_ENV['APP_URL'] . '/public' . $fileName;
+}
 function components (string $component, array $data = []): void {
     extract($data);
     require 'resources/views/components/' . $component . '.php';
