@@ -64,7 +64,7 @@
         event.preventDefault()
         let form = document.getElementById("form"),
             formData = new FormData(form);
-        const { default: apiFetch } = await import(<?php echo assets('/js/utils/apiFetch.js')?>);
+        const { default: apiFetch } = await import('<?php echo assets('/js/utils/apiFetch.js')?>');
         await apiFetch('/register',{method:'POST',body:formData})
             .then((data) => {
                 localStorage.setItem('token', data.token);
