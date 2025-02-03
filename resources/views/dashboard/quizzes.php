@@ -73,7 +73,7 @@
     </div>
     <script>
         async function quizzes() {
-            const { default: apiFetch } = await import('/js/utils/apiFetch.js'),
+            const { default: apiFetch } = await import(<?php echo assets('/js/utils/apiFetch.js')?>),
                 quizList = document.getElementById('quizList');
             await apiFetch('/quizzes',{method:'GET'})
                 .then((data) => {
@@ -121,7 +121,7 @@
         quizzes();
         async function deleteQuiz(id) {
             if (confirm("Are you sure?")){
-                const { default: apiFetch } = await import('/js/utils/apiFetch.js');
+                const { default: apiFetch } = await import(<?php echo assets('/js/utils/apiFetch.js')?>);
                 await apiFetch(`/quizzes/${id}`,{method:'DELETE'})
                     .then((data) => {
                         window.location.reload();
